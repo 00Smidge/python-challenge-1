@@ -67,23 +67,29 @@ print("Welcome to the variety food truck.")
 # Customers may want to order multiple items, so let's create a continuous
 # loop
 place_order = True
+
 while place_order:
+
   # Ask the customer from which menu category they want to order
   print("From which menu would you like to order? ")
 
-  # Create a variable for the menu item number
-  i = 1
+  # Create a variable for the menu (category) item number
+  category_id = 1
+
   # Create a dictionary to store the menu for later retrieval
   menu_items = {}
 
   # Print the options to choose from menu headings (all the first level
   # dictionary items in menu).
   for key in menu.keys():
-    print(f"{i}: {key}")
+
+    # print category id and category name
+    print(f"{category_id}: {key}")
+
     # Store the menu category associated with its menu item number
-    menu_items[i] = key
+    menu_items[category_id] = key
     # Add 1 to the menu item number
-    i += 1
+    category_id += 1
 
   # Get the customer's input
   menu_category = input("Type menu number: ")
@@ -93,38 +99,72 @@ while place_order:
     
     # Check if the customer's input is a valid option
     if int(menu_category) in menu_items.keys():
+      
       # Save the menu category name to a variable
       menu_category_name = menu_items[int(menu_category)]
+
       # Print out the menu category name they selected
       print(f"You selected {menu_category_name}")
+
       # Print out the menu options from the menu_category_name
       print(f"What {menu_category_name} item would you like to order?")
-      i = 1
+
+      # create variable for menu_item_id
+      menu_item_id = 1
+
+      # create an empty dictionary to store menu items in
       menu_items = {}
+
+      # print header prompt
       print("Item # | Item name                | Price")
       print("-------|--------------------------|-------")
-      
+
+      # loop through menu's key value pairs 
       for key, value in menu[menu_category_name].items():
+        
         # Check if the menu item is a dictionary to handle differently
         if type(value) is dict:
+
+          # loop through nested dictionary
           for key2, value2 in value.items():
+
+            # calculate the number of spaces for prompt
             num_item_spaces = 24 - len(key + key2) - 3
+
+            # set the spaces
             item_spaces = " " * num_item_spaces
-            print(f"{i}      | {key} - {key2}{item_spaces} | ${value2}")
-            menu_items[i] = {
+
+            # print results
+            print(f"{menu_item_id}      | {key} - {key2}{item_spaces} | ${value2}")
+
+            # store results in menu_items
+            menu_items[menu_item_id] = {
               "Item name": key + " - " + key2,
               "Price": value2
             }
-            i += 1
+
+            # increment id number
+            menu_item_id += 1
+            
         else:
+
+          # calculate number of spaces
           num_item_spaces = 24 - len(key)
+
+          # set spaces
           item_spaces = " " * num_item_spaces
-          print(f"{i}      | {key}{item_spaces} | ${value}")
-          menu_items[i] = {
+
+          # print results
+          print(f"{menu_item_id}      | {key}{item_spaces} | ${value}")
+
+          # store results in menu_items
+          menu_items[menu_item_id] = {
             "Item name": key,
             "Price": value
           }
-          i += 1
+
+          # increment id number
+          menu_item_id += 1
 
 	# 2. Ask customer to input menu item number
 
