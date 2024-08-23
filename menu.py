@@ -80,6 +80,7 @@ while place_order:
         if not quantity.isdigit(): 
           print('Error: your input is not iterable, your quantity has be defaulted to 1')  # noqa: E701
           quantity = 1
+        quantity = int(quantity)
         
         customer_order.append({
           "Item name": menu_items[menu_selection]['Item name'],
@@ -100,22 +101,22 @@ while place_order:
         print(f'Error. Your selection of {menu_selection} what not in the {menu_category_name} menu. Please try selecting from the provided list. ')
           
     else:
-          print(f"{menu_category} was not a menu option.")
+      print(f"{menu_category} was not a menu option.")
           
   else:
       print("You didn't select a number.")
       
-  keep_ordering = input("Would you like to keep ordering? (Y)es or (N)o ")
+  keep_ordering = str(input("Would you like to keep ordering? (Y)es or (N)o ")).upper()
   match keep_ordering:
-    case 'y':
+    case 'Y':
       continue
-    case 'n':
-      print('Fine! Get out!')
+    case 'N':
+      print('Thank you for shopping with Food Truck Food Co')
       place_order = False
       break
     case _:
       print('ERROR!! Unable to interpret input. Please use y or n')
-      keep_ordering = input("Would you like to keep ordering? (Y)es or (N)o ")
+      keep_ordering = str(input("Would you like to keep ordering? (Y)es or (N)o ")).upper()
       continue
 
 print("This is what we are preparing for you.\n")
